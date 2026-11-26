@@ -9,8 +9,10 @@ COPY requirements.txt ./
 RUN printf 'openssl_conf=i\n[i]\nssl_conf=s\n[s]\nsystem_default=d\n[d]\nGroups=X25519:prime256v1\n' > /tmp/pip-openssl.cnf \
  && OPENSSL_CONF=/tmp/pip-openssl.cnf pip install -r requirements.txt \
  && rm /tmp/pip-openssl.cnf
-COPY . .
+# Own the code as the app user so it runs regardless of the checkout's file permissions
+# (Render's clean clone gives directories no access for other users).
 RUN useradd --create-home --uid 1001 calma
+COPY --chown=calma:calma . .
 USER calma
 EXPOSE 8000
 # Apply migrations, then serve. One worker keeps memory low in Codespaces.

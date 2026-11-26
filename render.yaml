@@ -2,7 +2,8 @@
 # Render > New > Blueprint > pick this repo. It asks for the values marked sync: false.
 databases:
   - name: calma-db
-    plan: free          # Render's free Postgres expires after 30 days; upgrade or move to Neon for real use
+    plan: free
+    region: singapore   # MUST match the services: internal DB hostnames only resolve within one region          # Render's free Postgres expires after 30 days; upgrade or move to Neon for real use
     databaseName: calma
     user: calma
     postgresMajorVersion: "16"
