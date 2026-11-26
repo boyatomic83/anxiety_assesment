@@ -1,0 +1,13 @@
+{
+  "_note": "Backup signal only (SPEC 5/6.3). Matching is case-insensitive on normalised text. PHQ-9 item 9 is the primary rule.",
+  "en": [
+    "suicide", "suicidal", "kill myself", "killing myself", "end my life", "ending my life",
+    "take my life", "want to die", "wanna die", "better off dead", "no reason to live",
+    "hurt myself", "hurting myself", "harm myself", "self harm", "self-harm", "cut myself",
+    "overdose", "don't want to live", "dont want to live", "do not want to live", "end it all"
+  ],
+  "hi": [
+    "आत्महत्या", "ख़ुदकुशी", "खुदकुशी", "मरना चाहता", "मरना चाहती", "जीना नहीं चाहता",
+    "जीना नहीं चाहती", "खुद को नुकसान", "ख़ुद को नुकसान", "अपनी जान", "जान दे दूं"
+  ]
+}

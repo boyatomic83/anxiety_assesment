@@ -19,3 +19,13 @@ describe("api client", () => {
     await expect(api.health()).rejects.toBeInstanceOf(ApiError);
   });
 });
+
+describe("API_URL", () => {
+  it("strips a trailing /api/v1 so paths are never doubled", async () => {
+    vi.resetModules();
+    vi.stubEnv("NEXT_PUBLIC_API_URL", "http://example.test/api/v1/");
+    const mod = await import("@/lib/api");
+    expect(mod.API_URL).toBe("http://example.test");
+    vi.unstubAllEnvs();
+  });
+});

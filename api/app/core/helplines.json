@@ -1,0 +1,16 @@
+{
+  "IN": {
+    "country": "India",
+    "helplines": [
+      {"name": "Tele-MANAS (24x7, free)", "number": "14416", "alt_number": "1-800-891-4416"},
+      {"name": "Emergency services", "number": "112"}
+    ]
+  },
+  "default": {
+    "country": "International",
+    "helplines": [
+      {"name": "Local emergency services", "number": "112"},
+      {"name": "Find a helpline near you", "url": "https://findahelpline.com"}
+    ]
+  }
+}

@@ -75,6 +75,27 @@ def resolve_definition(raw: dict[str, Any], base: Path) -> dict[str, Any]:
             )
         for item, text in zip(items, lines, strict=True):
             item["text"] = text
+
+    # Official validated translations: {"hi": {"text_file", "timeframe_file", "options_file"}}
+    translations: dict[str, dict] = {}
+    for lang, files in (q.get("i18n") or {}).items():
+        where = f"{qid}.i18n.{lang}"
+        tr: dict[str, Any] = {}
+        if rel := files.get("text_file"):
+            tr["items"] = _read_text_lines(base, rel, where)
+            if len(tr["items"]) != len(q.get("items", [])):
+                raise QuestionnaireDefinitionError(
+                    f"{where}: {rel} has {len(tr['items'])} lines but there are "
+                    f"{len(q.get('items', []))} items"
+                )
+        if rel := files.get("timeframe_file"):
+            tr["timeframe"] = " ".join(_read_text_lines(base, rel, where))
+        if rel := files.get("options_file"):
+            tr["options"] = _read_text_lines(base, rel, where)
+            if len(tr["options"]) != len(q.get("options") or []):
+                raise QuestionnaireDefinitionError(f"{where}: {rel} option count mismatch")
+        translations[lang] = tr
+    q["i18n"] = translations
     return q
 
 

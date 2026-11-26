@@ -192,3 +192,64 @@ def test_subscale_validation():
 def test_unknown_fields_rejected():
     with pytest.raises(ValidationError):
         QuestionnaireDef.model_validate(resolved(typo_field=1))
+
+
+# ---------- official translations ----------
+
+
+def test_translation_files_are_loaded(tmp_path):
+    d = raw_def(
+        i18n={
+            "hi": {
+                "text_file": "items/hi.txt",
+                "timeframe_file": "items/hi_t.txt",
+                "options_file": "items/hi_o.txt",
+            }
+        }
+    )
+    files = {
+        "items/hi.txt": "अनुवाद एक\nअनुवाद दो\n",
+        "items/hi_t.txt": "समय\n",
+        "items/hi_o.txt": "नहीं\nहाँ\n",
+    }
+    q = load_dir(write_dir(tmp_path, d, files))["test"]
+    assert q.i18n["hi"]["items"] == ["अनुवाद एक", "अनुवाद दो"]
+    assert q.i18n["hi"]["timeframe"] == "समय"
+    assert q.i18n["hi"]["options"] == ["नहीं", "हाँ"]
+
+
+@pytest.mark.parametrize(
+    ("files", "message"),
+    [
+        ({"items/hi.txt": "only one\n"}, "1 lines but there are 2 items"),
+        ({"items/hi.txt": "a\nb\n", "items/hi_o.txt": "x\n"}, "option count mismatch"),
+    ],
+)
+def test_translation_mismatches(tmp_path, files, message):
+    d = raw_def(i18n={"hi": {"text_file": "items/hi.txt", "options_file": "items/hi_o.txt"}})
+    files.setdefault("items/hi_o.txt", "x\ny\n")
+    with pytest.raises(QuestionnaireDefinitionError, match=message):
+        load_dir(write_dir(tmp_path, d, files))
+
+
+def test_api_serves_translation_when_available(client, monkeypatch):
+    from app.services import questionnaires as qs
+
+    q = qs.get_questionnaire("gad2")
+    fake = q.model_copy(
+        update={
+            "i18n": {
+                "hi": {
+                    "items": ["अनुवाद 1", "अनुवाद 2"],
+                    "timeframe": "समय",
+                    "options": ["क", "ख", "ग", "घ"],
+                }
+            }
+        }
+    )
+    monkeypatch.setitem(qs.load_all(), "gad2", fake)
+    hi = client.get("/api/v1/questionnaires/gad2?lang=hi").json()
+    assert hi["language"] == "hi" and hi["items"][0]["text"] == "अनुवाद 1"
+    assert hi["timeframe"] == "समय" and hi["options"][3]["label"] == "घ"
+    en = client.get("/api/v1/questionnaires/gad7?lang=hi").json()
+    assert en["language"] == "en"  # no official Hindi version yet -> English

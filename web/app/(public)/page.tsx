@@ -1,36 +1,29 @@
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
-
-const points = [
-  { title: "Validated questionnaires", body: "GAD-7, PHQ-9 and OASIS, scored with their official rules." },
-  { title: "Private by design", body: "Your answers are encrypted. Guests leave no trace after 24 hours." },
-  { title: "About 5 minutes", body: "One question at a time, at your own pace. You can stop whenever you like." },
-];
+import { Disclaimer } from "@/components/calma/disclaimer";
 
 export default function LandingPage() {
+  const t = useTranslations("landing");
+  const points = [1, 2, 3].map((n) => ({ title: t(`p${n}Title`), body: t(`p${n}Body`) }));
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl flex-col justify-center gap-10 px-6 py-16">
+    <main className="mx-auto flex max-w-2xl flex-col justify-center gap-10 px-6 py-16">
       <header className="flex flex-col gap-5">
         <p className="text-sm font-medium tracking-wide text-slate-brand uppercase">Calma</p>
-        <h1 className="text-4xl font-medium text-foreground sm:text-5xl">
-          A quiet moment to check in with yourself.
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          Answer a few short, clinically validated questions about how you&apos;ve been feeling over the
-          last two weeks, and get a clear, plain-language summary.
-        </p>
+        <h1 className="text-4xl font-medium text-foreground sm:text-5xl">{t("title")}</h1>
+        <p className="text-lg text-muted-foreground">{t("lead")}</p>
         <div className="flex flex-wrap items-center gap-4 pt-2">
-          {/* The assessment flow arrives in Phase 3. */}
-          <Button size="lg" className="h-12 rounded-xl px-7 text-base" disabled aria-describedby="coming-soon">
-            Start a check-in
-          </Button>
-          <span id="coming-soon" className="text-sm text-muted-foreground">
-            Coming soon
-          </span>
+          <Link
+            href="/consent"
+            className="inline-flex h-12 items-center rounded-xl bg-primary px-7 text-base font-medium text-primary-foreground hover:bg-primary/90 focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          >
+            {t("start")}
+          </Link>
+          <span className="text-sm text-muted-foreground">{t("time")}</span>
         </div>
       </header>
 
-      <ul className="grid gap-4 sm:grid-cols-3" aria-label="What to expect">
+      <ul className="grid gap-4 sm:grid-cols-3" aria-label={t("pointsLabel")}>
         {points.map((p) => (
           <li key={p.title}>
             <Card className="h-full rounded-2xl border-border/70 shadow-soft">
@@ -44,11 +37,7 @@ export default function LandingPage() {
         ))}
       </ul>
 
-      <footer className="rounded-2xl bg-muted px-5 py-4 text-sm text-muted-foreground">
-        <strong className="font-semibold text-foreground">Calma is a screening tool, not a diagnosis.</strong>{" "}
-        If you are in crisis or thinking about harming yourself, please call Tele-MANAS on 14416 or
-        emergency services on 112.
-      </footer>
+      <Disclaimer />
     </main>
   );
 }

@@ -66,14 +66,36 @@ alembic revision --autogenerate -m "..." && alembic upgrade head
 api/.venv/bin/python scripts/fetch_questionnaires.py           # prints line counts only
 api/.venv/bin/python scripts/fetch_questionnaires.py --check   # verify counts, no download
 
-# ML (from ml/)
-pip install -r requirements.txt
+# ML (from ml/): retrain + export to api/app/ml_models/ + regenerate ml/reports/
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python -m src.train
+.venv/bin/python -m pytest -q tests
+
+# End-to-end + accessibility (needs the stack running: docker compose up -d --build)
+cd web && npx playwright install --with-deps chromium && npm run test:e2e
 ```
+
+**Lock file:** this Codespace's npm may differ from Node 22's npm used in Docker/CI. After any
+`npm install`, resync with:
+`docker run --rm -u "$(id -u):$(id -g)" -e npm_config_cache=/tmp/npmcache -v "$PWD/web:/app" -w /app node:22-alpine npm install --package-lock-only`
 
 Theme tokens live in `web/app/globals.css` (SPEC.md section 9). Use `bg-sage`, `text-slate-brand`,
 `bg-band-{minimal,mild,moderate,severe}`, `font-serif` (Fraunces) and `font-sans` (Inter).
-`--primary` is a deeper sage (`#4A7561`) so that white button text meets WCAG AA. Spec sage
-`#5B8A72` is still available as `sage`.
+`--primary` is a deeper sage (`#4A7561`) and `--muted-foreground` a deeper slate (`#50677A`) so
+text meets WCAG AA. Spec sage `#5B8A72` / slate `#5A7184` are still available as `sage` /
+`slate-brand` for decoration. UI copy lives in `web/messages/{en,hi}.json` (same keys, enforced
+by a test); questionnaire wording never does.
+
+## Architecture notes
+- Submit pipeline: `api/app/services/assessment.py` runs safety -> validated scoring -> ML.
+- Guest sessions are authorised by an `X-Session-Token` header (only its keyed hash is stored)
+  and purged after 24h by `services/jobs.py`; signed-in users use a 15-min bearer token plus a
+  7-day httpOnly refresh cookie.
+- ML artifacts are JSON (no pickle) in `api/app/ml_models/`; the feature pipeline lives in
+  `api/app/services/features.py` and `ml/src` imports it, so training and serving can't drift.
+- Hindi questionnaire wording: the official Pfizer Hindi PDFs lose glyphs on extraction, so
+  items are shown in English with a notice. Add translations only as files in `items/` via
+  `"i18n": {"hi": {"text_file", "timeframe_file", "options_file"}}`; never type them.
 
 ## Rules
 

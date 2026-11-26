@@ -35,7 +35,7 @@
   --secondary: #e9eef1;
   --secondary-foreground: var(--calma-text);
   --muted: #eef1ee;
-  --muted-foreground: var(--calma-slate);
+  --muted-foreground: #50677a; /* slate darkened for AA on muted surfaces (5.1:1) */
   --accent: #e6efe9;
   --accent-foreground: var(--calma-text);
   --destructive: var(--band-severe);

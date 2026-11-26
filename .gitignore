@@ -8,3 +8,5 @@ ml/models/*.joblib
 .pytest_cache
 .ruff_cache
 .coverage
+ml/data/processed/*.csv
+ml/.venv

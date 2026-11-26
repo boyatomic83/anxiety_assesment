@@ -60,7 +60,7 @@ class Settings(BaseSettings):
     next_public_api_url: str = "http://localhost:8000"
 
     # --- ML (Phase 5) ---
-    model_path: str = "ml/models/model.joblib"
+    model_path: str = "app/ml_models/calma-model.json"
     model_version: str = "0.0.0"
 
     # --- Email (re-test reminders) ---
@@ -73,11 +73,29 @@ class Settings(BaseSettings):
     # --- Error tracking ---
     sentry_dsn: SecretStr | None = None
 
+    # --- Behaviour (not in .env.example; safe defaults) ---
+    consent_version: str = "2026-11-v1"
+    guest_retention_hours: int = 24
+    share_code_ttl_days: int = 14
+    rate_limit_enabled: bool = True
+    background_jobs_enabled: bool = True
+    web_url: str = "http://localhost:3000"
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def _split_origins(cls, v: object) -> object:
         if isinstance(v, str):
             return [o.strip() for o in v.split(",") if o.strip()]
+        return v
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def _psycopg_driver(cls, v: object) -> object:
+        """Hosted Postgres (Render, Neon, Supabase) hands out postgres:// URLs; use psycopg 3."""
+        if isinstance(v, str):
+            for prefix in ("postgres://", "postgresql://"):
+                if v.startswith(prefix):
+                    return "postgresql+psycopg://" + v[len(prefix) :]
         return v
 
     @field_validator("app_env", mode="after")

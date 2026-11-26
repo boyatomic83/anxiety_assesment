@@ -44,47 +44,37 @@ Optional: rebuild the Codespace so .devcontainer/devcontainer.json applies
 Command palette -> "Codespaces: Rebuild Container".
 
 
-STEP 5 - Phase 1  [BUILT - review, then commit]
------------------------------------------------
-Done: questionnaire JSONs (structure only), wording extracted from official PDFs by
-scripts/fetch_questionnaires.py into api/app/questionnaires/items/, scoring engine
-(api/app/services/scoring.py), 112 tests, 100% coverage on scoring/loader/schema.
+STEP 5 - Phases 1-8  [BUILT - review, then commit]
+--------------------------------------------------
+Everything in SPEC.md section 12 is built and tested, except the actual deployment
+(you trigger that yourself, see DEPLOY.md).
 
-YOUR CHECK before committing: open each items/*.txt next to its source PDF
-(URLs in items/SOURCES.json) and confirm the wording matches word for word.
+Verified:
+  - api: 172 tests (100% coverage on scoring/loader/schema), ruff clean
+  - web: 23 unit tests, typecheck + lint clean
+  - e2e: 8 Playwright tests in Chromium (full flow, crisis flow, short GAD-2 flow,
+    axe WCAG 2.2 AA with 0 violations, incl. the results page)
+  - Lighthouse accessibility: 100 on /, /about, /consent, /login, /register
+  - ml: 4 tests; model card + plots in ml/reports/
+  - Full stack in docker compose on Postgres (migrations, admin bootstrap, PDF)
 
-Suggested commit:
+YOUR CHECKS before committing:
+  1. Open each api/app/questionnaires/items/*.txt next to its source PDF
+     (URLs in items/SOURCES.json) and confirm the wording word for word.
+  2. Ask a native speaker to review web/messages/hi.json (UI copy only).
+  3. Read ml/reports/MODEL_CARD.md: the model is trained on SYNTHETIC data.
+
+Try it:
+    docker compose up -d --build
+    open http://localhost:3000            (sign in as ADMIN_EMAIL / ADMIN_PASSWORD from .env)
+    cd web && npm run test:e2e            (needs: npx playwright install --with-deps chromium)
+    docker compose down
+
+Suggested commits (small, conventional) - or one big one:
     git add -A
-    git commit -m "feat(api): questionnaire definitions and validated scoring engine"
+    git commit -m "feat: assessment API, frontend, ML estimate, accounts, clinician sharing, i18n"
 
-Next: Phase 2 in a NEW session (DB models, sessions/answers/submit API, safety check).
-
-(Original Phase 1 instructions, kept for reference)
----------------------------------------------------
-Phase 1 = questionnaire JSON files + scoring engine + tests.
-Done when: all scoring tests pass.
-
-Paste this as the first message:
-
-    Read CLAUDE.md and SPEC.md. We are doing Phase 1 from SPEC.md
-    section 12. Plan first (list files you'll create/change), wait for my
-    OK, then build it with tests, run the tests, and summarise.
-    Don't commit.
-
-Important for Phase 1:
-- Item texts must be copied EXACTLY from the official instruments
-  (GAD-2, GAD-7, PHQ-9, OASIS, DASS-21). Ask Claude to cite the source
-  for each, and check them yourself against the original papers/forms.
-- Hindi translations: only use official validated translations. If you
-  don't have them yet, leave Hindi out for now (it belongs to Phase 8).
-
-
-LATER PHASES (one per session, same prompt with a new number)
--------------------------------------------------------------
-  2  Database models, Alembic migrations, sessions/answers/submit API, safety check
-  3  Frontend: landing, consent, assessment flow, crisis screen
-  4  Results page + PDF report
-  5  ML: synthetic data, training, evaluation, model card, SHAP
-  6  Login, history dashboard, delete-my-data
-  7  Clinician dashboard, share codes, audit log
-  8  Hindi, accessibility pass, hardening, deploy
+Not done on purpose:
+  - Deployment (DEPLOY.md has the steps; it publishes to your Vercel/Render accounts).
+  - Hindi questionnaire wording (official PDFs don't extract cleanly; shown in English).
+  - Real-data model (Phase B): needs an openly licensed dataset you choose.

@@ -72,3 +72,12 @@ def test_empty_optional_values_fall_back_to_defaults(monkeypatch):
     assert s.smtp_port == 587
     assert s.sentry_dsn is None
     assert s.is_production
+
+
+@pytest.mark.parametrize(
+    "url",
+    ["postgres://u:p@h:5432/d", "postgresql://u:p@h:5432/d", "postgresql+psycopg://u:p@h:5432/d"],
+)
+def test_hosted_postgres_urls_use_psycopg(monkeypatch, url):
+    s = make(monkeypatch, DATABASE_URL=url)
+    assert s.database_url.get_secret_value() == "postgresql+psycopg://u:p@h:5432/d"

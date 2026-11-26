@@ -3,7 +3,7 @@
 from collections.abc import Iterator
 from functools import lru_cache
 
-from sqlalchemy import Engine, create_engine, text
+from sqlalchemy import Engine, create_engine, event, text
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.core.config import get_settings
@@ -13,7 +13,14 @@ from app.core.config import get_settings
 def get_engine() -> Engine:
     url = get_settings().database_url.get_secret_value()
     connect_args = {"connect_timeout": 3} if url.startswith("postgresql") else {}
-    return create_engine(url, pool_pre_ping=True, connect_args=connect_args)
+    engine = create_engine(url, pool_pre_ping=True, connect_args=connect_args)
+    if url.startswith("sqlite"):
+        # Enforce ON DELETE CASCADE / SET NULL like Postgres does.
+        @event.listens_for(engine, "connect")
+        def _fk_on(dbapi_conn, _record):  # pragma: no cover - trivial
+            dbapi_conn.execute("PRAGMA foreign_keys=ON")
+
+    return engine
 
 
 @lru_cache

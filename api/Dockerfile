@@ -14,4 +14,4 @@ RUN useradd --create-home --uid 1001 calma
 USER calma
 EXPOSE 8000
 # Apply migrations, then serve. One worker keeps memory low in Codespaces.
-CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1"]
+CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1 --proxy-headers --forwarded-allow-ips=*"]
