@@ -62,6 +62,10 @@ uvicorn app.main:app --reload --port 8000   # needs a reachable DATABASE_URL
 ruff check . && ruff format --check . && pytest
 alembic revision --autogenerate -m "..." && alembic upgrade head
 
+# Questionnaire wording (re-download official forms, extract to api/app/questionnaires/items/)
+api/.venv/bin/python scripts/fetch_questionnaires.py           # prints line counts only
+api/.venv/bin/python scripts/fetch_questionnaires.py --check   # verify counts, no download
+
 # ML (from ml/)
 pip install -r requirements.txt
 ```
@@ -79,6 +83,10 @@ Theme tokens live in `web/app/globals.css` (SPEC.md section 9). Use `bg-sage`, `
   (no real values) and to `Settings`.
 - **Never paraphrase validated questionnaire items.** Item text, options and timeframes are copied
   exactly from the official instrument, and only official validated translations are used.
+- **Never type questionnaire wording yourself** (in replies, JSON or tests). JSON definitions in
+  `api/app/questionnaires/` hold structure only and reference `items/*.txt` via `text_file`,
+  `options_file`, `timeframe_file`; those files come from `scripts/fetch_questionnaires.py`.
+  Never print their contents; check line counts instead. Tests use item ids and values only.
 - **The safety check always runs first**, before scoring and before ML, on every submit.
 - **The validated score always takes priority** over the ML estimate. When the two disagree, show
   both and mark the validated one as primary. Label the ML output "AI-assisted estimate".

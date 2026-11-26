@@ -44,7 +44,22 @@ Optional: rebuild the Codespace so .devcontainer/devcontainer.json applies
 Command palette -> "Codespaces: Rebuild Container".
 
 
-STEP 5 - Start Phase 1 in a NEW Claude Code session
+STEP 5 - Phase 1  [BUILT - review, then commit]
+-----------------------------------------------
+Done: questionnaire JSONs (structure only), wording extracted from official PDFs by
+scripts/fetch_questionnaires.py into api/app/questionnaires/items/, scoring engine
+(api/app/services/scoring.py), 112 tests, 100% coverage on scoring/loader/schema.
+
+YOUR CHECK before committing: open each items/*.txt next to its source PDF
+(URLs in items/SOURCES.json) and confirm the wording matches word for word.
+
+Suggested commit:
+    git add -A
+    git commit -m "feat(api): questionnaire definitions and validated scoring engine"
+
+Next: Phase 2 in a NEW session (DB models, sessions/answers/submit API, safety check).
+
+(Original Phase 1 instructions, kept for reference)
 ---------------------------------------------------
 Phase 1 = questionnaire JSON files + scoring engine + tests.
 Done when: all scoring tests pass.

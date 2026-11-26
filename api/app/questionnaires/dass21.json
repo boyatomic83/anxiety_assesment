@@ -1,0 +1,252 @@
+{
+  "id": "dass21",
+  "name": "DASS-21",
+  "version": "1.0",
+  "timeframe_file": "items/dass21_instructions.txt",
+  "options": [
+    {
+      "value": 0
+    },
+    {
+      "value": 1
+    },
+    {
+      "value": 2
+    },
+    {
+      "value": 3
+    }
+  ],
+  "options_file": "items/dass21_options.txt",
+  "items": [
+    {
+      "id": "dass21_1",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_2",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_3",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_4",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_5",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_6",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_7",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_8",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_9",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_10",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_11",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_12",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_13",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_14",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_15",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_16",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_17",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_18",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_19",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_20",
+      "text_file": "items/dass21.txt"
+    },
+    {
+      "id": "dass21_21",
+      "text_file": "items/dass21.txt"
+    }
+  ],
+  "scoring": {
+    "method": "subscales",
+    "subscales": {
+      "depression": {
+        "name": "Depression",
+        "items": [
+          "dass21_3",
+          "dass21_5",
+          "dass21_10",
+          "dass21_13",
+          "dass21_16",
+          "dass21_17",
+          "dass21_21"
+        ],
+        "multiplier": 2,
+        "bands": [
+          {
+            "min": 0,
+            "max": 9,
+            "label": "Normal",
+            "level": 0
+          },
+          {
+            "min": 10,
+            "max": 13,
+            "label": "Mild",
+            "level": 1
+          },
+          {
+            "min": 14,
+            "max": 20,
+            "label": "Moderate",
+            "level": 2
+          },
+          {
+            "min": 21,
+            "max": 27,
+            "label": "Severe",
+            "level": 3
+          },
+          {
+            "min": 28,
+            "max": 42,
+            "label": "Extremely severe",
+            "level": 4
+          }
+        ]
+      },
+      "anxiety": {
+        "name": "Anxiety",
+        "items": [
+          "dass21_2",
+          "dass21_4",
+          "dass21_7",
+          "dass21_9",
+          "dass21_15",
+          "dass21_19",
+          "dass21_20"
+        ],
+        "multiplier": 2,
+        "bands": [
+          {
+            "min": 0,
+            "max": 7,
+            "label": "Normal",
+            "level": 0
+          },
+          {
+            "min": 8,
+            "max": 9,
+            "label": "Mild",
+            "level": 1
+          },
+          {
+            "min": 10,
+            "max": 14,
+            "label": "Moderate",
+            "level": 2
+          },
+          {
+            "min": 15,
+            "max": 19,
+            "label": "Severe",
+            "level": 3
+          },
+          {
+            "min": 20,
+            "max": 42,
+            "label": "Extremely severe",
+            "level": 4
+          }
+        ]
+      },
+      "stress": {
+        "name": "Stress",
+        "items": [
+          "dass21_1",
+          "dass21_6",
+          "dass21_8",
+          "dass21_11",
+          "dass21_12",
+          "dass21_14",
+          "dass21_18"
+        ],
+        "multiplier": 2,
+        "bands": [
+          {
+            "min": 0,
+            "max": 14,
+            "label": "Normal",
+            "level": 0
+          },
+          {
+            "min": 15,
+            "max": 18,
+            "label": "Mild",
+            "level": 1
+          },
+          {
+            "min": 19,
+            "max": 25,
+            "label": "Moderate",
+            "level": 2
+          },
+          {
+            "min": 26,
+            "max": 33,
+            "label": "Severe",
+            "level": 3
+          },
+          {
+            "min": 34,
+            "max": 42,
+            "label": "Extremely severe",
+            "level": 4
+          }
+        ]
+      }
+    }
+  },
+  "safety_items": [],
+  "source": "Lovibond SH, Lovibond PF. Manual for the Depression Anxiety Stress Scales. 2nd ed. Sydney: Psychology Foundation; 1995.",
+  "licence": "Public domain (UNSW DASS site: may be copied, must not be modified or sold)",
+  "notes": "Subscale sums are multiplied by 2 to match the DASS-42 severity bands.",
+  "i18n": {}
+}

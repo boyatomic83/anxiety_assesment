@@ -1,0 +1,140 @@
+{
+  "id": "oasis",
+  "name": "OASIS",
+  "version": "1.0",
+  "timeframe_file": "items/oasis_instructions.txt",
+  "items": [
+    {
+      "id": "oasis_1",
+      "text_file": "items/oasis.txt",
+      "options": [
+        {
+          "value": 0
+        },
+        {
+          "value": 1
+        },
+        {
+          "value": 2
+        },
+        {
+          "value": 3
+        },
+        {
+          "value": 4
+        }
+      ],
+      "options_file": "items/oasis_1_options.txt"
+    },
+    {
+      "id": "oasis_2",
+      "text_file": "items/oasis.txt",
+      "options": [
+        {
+          "value": 0
+        },
+        {
+          "value": 1
+        },
+        {
+          "value": 2
+        },
+        {
+          "value": 3
+        },
+        {
+          "value": 4
+        }
+      ],
+      "options_file": "items/oasis_2_options.txt"
+    },
+    {
+      "id": "oasis_3",
+      "text_file": "items/oasis.txt",
+      "options": [
+        {
+          "value": 0
+        },
+        {
+          "value": 1
+        },
+        {
+          "value": 2
+        },
+        {
+          "value": 3
+        },
+        {
+          "value": 4
+        }
+      ],
+      "options_file": "items/oasis_3_options.txt"
+    },
+    {
+      "id": "oasis_4",
+      "text_file": "items/oasis.txt",
+      "options": [
+        {
+          "value": 0
+        },
+        {
+          "value": 1
+        },
+        {
+          "value": 2
+        },
+        {
+          "value": 3
+        },
+        {
+          "value": 4
+        }
+      ],
+      "options_file": "items/oasis_4_options.txt"
+    },
+    {
+      "id": "oasis_5",
+      "text_file": "items/oasis.txt",
+      "options": [
+        {
+          "value": 0
+        },
+        {
+          "value": 1
+        },
+        {
+          "value": 2
+        },
+        {
+          "value": 3
+        },
+        {
+          "value": 4
+        }
+      ],
+      "options_file": "items/oasis_5_options.txt"
+    }
+  ],
+  "scoring": {
+    "method": "sum"
+  },
+  "bands": [
+    {
+      "min": 0,
+      "max": 7,
+      "label": "Below clinical cut-off",
+      "level": 0
+    },
+    {
+      "min": 8,
+      "max": 20,
+      "label": "Above clinical cut-off",
+      "level": 1
+    }
+  ],
+  "safety_items": [],
+  "source": "Norman SB, Cissell SH, Means-Christensen AJ, Stein MB. Depress Anxiety. 2006;23:245-249. Cut-off 8: Campbell-Sills L et al. J Affect Disord. 2009;112:92-101.",
+  "licence": "Free to use (published public instrument)",
+  "notes": "OASIS has no official severity bands; only the validated cut-off of 8 is used.",
+  "i18n": {}
+}

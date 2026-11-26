@@ -1,0 +1,87 @@
+{
+  "id": "gad7",
+  "name": "GAD-7",
+  "version": "1.0",
+  "timeframe_file": "items/gad7_instructions.txt",
+  "options": [
+    {
+      "value": 0,
+      "label": "Not at all"
+    },
+    {
+      "value": 1,
+      "label": "Several days"
+    },
+    {
+      "value": 2,
+      "label": "More than half the days"
+    },
+    {
+      "value": 3,
+      "label": "Nearly every day"
+    }
+  ],
+  "items": [
+    {
+      "id": "gad7_1",
+      "text_file": "items/gad7.txt"
+    },
+    {
+      "id": "gad7_2",
+      "text_file": "items/gad7.txt"
+    },
+    {
+      "id": "gad7_3",
+      "text_file": "items/gad7.txt"
+    },
+    {
+      "id": "gad7_4",
+      "text_file": "items/gad7.txt"
+    },
+    {
+      "id": "gad7_5",
+      "text_file": "items/gad7.txt"
+    },
+    {
+      "id": "gad7_6",
+      "text_file": "items/gad7.txt"
+    },
+    {
+      "id": "gad7_7",
+      "text_file": "items/gad7.txt"
+    }
+  ],
+  "scoring": {
+    "method": "sum"
+  },
+  "bands": [
+    {
+      "min": 0,
+      "max": 4,
+      "label": "Minimal",
+      "level": 0
+    },
+    {
+      "min": 5,
+      "max": 9,
+      "label": "Mild",
+      "level": 1
+    },
+    {
+      "min": 10,
+      "max": 14,
+      "label": "Moderate",
+      "level": 2
+    },
+    {
+      "min": 15,
+      "max": 21,
+      "label": "Severe",
+      "level": 3
+    }
+  ],
+  "safety_items": [],
+  "source": "Spitzer RL, Kroenke K, Williams JBW, Löwe B. Arch Intern Med. 2006;166:1092-1097.",
+  "licence": "Free to use (Pfizer PHQ Screeners; no permission required)",
+  "i18n": {}
+}

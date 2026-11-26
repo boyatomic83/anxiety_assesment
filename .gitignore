@@ -7,3 +7,4 @@ ml/data/raw
 ml/models/*.joblib
 .pytest_cache
 .ruff_cache
+.coverage

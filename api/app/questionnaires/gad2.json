@@ -1,0 +1,56 @@
+{
+  "id": "gad2",
+  "name": "GAD-2",
+  "version": "1.0",
+  "timeframe_file": "items/gad7_instructions.txt",
+  "options": [
+    {
+      "value": 0,
+      "label": "Not at all"
+    },
+    {
+      "value": 1,
+      "label": "Several days"
+    },
+    {
+      "value": 2,
+      "label": "More than half the days"
+    },
+    {
+      "value": 3,
+      "label": "Nearly every day"
+    }
+  ],
+  "items": [
+    {
+      "id": "gad7_1",
+      "text_file": "items/gad2.txt"
+    },
+    {
+      "id": "gad7_2",
+      "text_file": "items/gad2.txt"
+    }
+  ],
+  "scoring": {
+    "method": "sum"
+  },
+  "bands": [
+    {
+      "min": 0,
+      "max": 2,
+      "label": "Negative screen",
+      "level": 0
+    },
+    {
+      "min": 3,
+      "max": 6,
+      "label": "Positive screen",
+      "level": 1
+    }
+  ],
+  "safety_items": [],
+  "source": "Kroenke K, Spitzer RL, Williams JBW, Monahan PO, Löwe B. Ann Intern Med. 2007;146:317-325.",
+  "licence": "Free to use (Pfizer PHQ Screeners; no permission required)",
+  "notes": "GAD-2 = GAD-7 items 1-2. Score >= 3 continues to the remaining GAD-7 items (SPEC.md section 5).",
+  "i18n": {}
+}

@@ -1,0 +1,107 @@
+{
+  "id": "phq9",
+  "name": "PHQ-9",
+  "version": "1.0",
+  "timeframe_file": "items/phq9_instructions.txt",
+  "options": [
+    {
+      "value": 0,
+      "label": "Not at all"
+    },
+    {
+      "value": 1,
+      "label": "Several days"
+    },
+    {
+      "value": 2,
+      "label": "More than half the days"
+    },
+    {
+      "value": 3,
+      "label": "Nearly every day"
+    }
+  ],
+  "items": [
+    {
+      "id": "phq9_1",
+      "text_file": "items/phq9.txt"
+    },
+    {
+      "id": "phq9_2",
+      "text_file": "items/phq9.txt"
+    },
+    {
+      "id": "phq9_3",
+      "text_file": "items/phq9.txt"
+    },
+    {
+      "id": "phq9_4",
+      "text_file": "items/phq9.txt"
+    },
+    {
+      "id": "phq9_5",
+      "text_file": "items/phq9.txt"
+    },
+    {
+      "id": "phq9_6",
+      "text_file": "items/phq9.txt"
+    },
+    {
+      "id": "phq9_7",
+      "text_file": "items/phq9.txt"
+    },
+    {
+      "id": "phq9_8",
+      "text_file": "items/phq9.txt"
+    },
+    {
+      "id": "phq9_9",
+      "text_file": "items/phq9.txt"
+    }
+  ],
+  "scoring": {
+    "method": "sum"
+  },
+  "bands": [
+    {
+      "min": 0,
+      "max": 4,
+      "label": "Minimal",
+      "level": 0
+    },
+    {
+      "min": 5,
+      "max": 9,
+      "label": "Mild",
+      "level": 1
+    },
+    {
+      "min": 10,
+      "max": 14,
+      "label": "Moderate",
+      "level": 2
+    },
+    {
+      "min": 15,
+      "max": 19,
+      "label": "Moderately severe",
+      "level": 3
+    },
+    {
+      "min": 20,
+      "max": 27,
+      "label": "Severe",
+      "level": 4
+    }
+  ],
+  "safety_items": [
+    {
+      "item_id": "phq9_9",
+      "min_value": 1
+    }
+  ],
+  "source": "Kroenke K, Spitzer RL, Williams JBW. J Gen Intern Med. 2001;16:606-613.",
+  "licence": "Free to use (Pfizer PHQ Screeners; no permission required)",
+  "notes": "The unscored functional-difficulty question at the end of the form is not included in v1.",
+  "i18n": {}
+}

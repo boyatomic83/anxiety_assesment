@@ -25,3 +25,5 @@ def client():
     get_engine.cache_clear()
     with TestClient(create_app()) as c:
         yield c
+    get_engine().dispose()
+    get_engine.cache_clear()

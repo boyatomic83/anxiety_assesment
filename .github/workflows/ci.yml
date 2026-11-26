@@ -42,6 +42,6 @@ jobs:
           cache: pip
           cache-dependency-path: api/requirements*.txt
       - run: pip install -r requirements-dev.txt
-      - run: ruff check .
+      - run: ruff check . ../scripts
       - run: ruff format --check .
-      - run: pytest
+      - run: pytest --cov=app.services.scoring --cov=app.services.questionnaires --cov=app.schemas.questionnaire --cov-fail-under=100

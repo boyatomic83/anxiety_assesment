@@ -1,0 +1,31 @@
+{
+  "phq9": {
+    "url": "https://www.phqscreeners.com/images/sites/g/files/g10060481/f/201412/PHQ-9_English.pdf",
+    "sha256": "e3fb5b8853e3530c9025c822b99fd4f4bc17da49eefda5ed689c49238c132a46",
+    "retrieved": "2026-11-26"
+  },
+  "gad7": {
+    "url": "https://www.phqscreeners.com/images/sites/g/files/g10060481/f/201412/GAD-7_English.pdf",
+    "sha256": "180538a8e3f2f3cb012f9991d1b307d3d14720e82bf0593f8853f4885740ce48",
+    "retrieved": "2026-11-26"
+  },
+  "dass21": {
+    "url": "https://www2.psy.unsw.edu.au/DASS/Download%20files/Dass21.pdf",
+    "sha256": "8644cc86534d397e371985d5b25422ba76c4cdae0a5aed8f1a4453c17a5cd393",
+    "retrieved": "2026-11-26"
+  },
+  "oasis": {
+    "url": "https://depts.washington.edu/uwhatc/PDF/TF-%20CBT/pages/1%20Assessment/Standardized%20Measures/OASIS%20Overall%20Anxiety%20Scale.pdf",
+    "sha256": "fcfcc0c0cfd5fd3aca2a21f341280fda551104c3d2695edda7c4afebb5c972cf",
+    "retrieved": "2026-11-26",
+    "crosscheck": {
+      "url": "https://www.chcs.org/media/overallanxietyseverityandimpairmentscale1.pdf",
+      "item_similarity_min": 1.0,
+      "option_similarity_min": 1.0
+    }
+  },
+  "gad2": {
+    "derived_from": "gad7",
+    "note": "GAD-2 = GAD-7 items 1-2"
+  }
+}
