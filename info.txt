@@ -1,0 +1,75 @@
+CALMA - WHAT TO DO NEXT
+=======================
+Status: Phase 0 (repo skeleton) is built and verified, but not committed yet.
+
+
+STEP 1 - Fix the env var names  [DONE]
+--------------------------------------
+api/app/core/config.py now declares all 26 variables in .env.example.
+A test (api/tests/test_config.py) fails if a new variable is added to
+.env.example but not to config.py.
+
+
+STEP 2 - Undo the accidental edit to SPEC.md
+--------------------------------------------
+Section 6.3 has a line break in the middle of the word "classifier".
+
+    git checkout SPEC.md
+
+
+STEP 3 - Check that everything works
+------------------------------------
+    docker compose up -d --build
+    curl http://localhost:8000/api/v1/health     (should say "database":"ok")
+    open http://localhost:3000                   (calm landing page)
+    open http://localhost:8000/docs              (API docs)
+    docker compose down
+
+    cd web && npm test && npm run lint && npm run typecheck && cd ..
+    cd api && . .venv/bin/activate && pytest && ruff check . && deactivate && cd ..
+
+
+STEP 4 - Review and commit (you commit, not Claude)
+---------------------------------------------------
+    git status
+    git diff
+    git add -A
+    git commit -m "chore: scaffold monorepo, docker compose, devcontainer and CI"
+    git push
+
+After pushing, check the Actions tab on GitHub. The CI workflow should be green.
+
+Optional: rebuild the Codespace so .devcontainer/devcontainer.json applies
+(it gives you Node 22 + Python 3.12 + Claude Code + the commit-msg hook).
+Command palette -> "Codespaces: Rebuild Container".
+
+
+STEP 5 - Start Phase 1 in a NEW Claude Code session
+---------------------------------------------------
+Phase 1 = questionnaire JSON files + scoring engine + tests.
+Done when: all scoring tests pass.
+
+Paste this as the first message:
+
+    Read CLAUDE.md and SPEC.md. We are doing Phase 1 from SPEC.md
+    section 12. Plan first (list files you'll create/change), wait for my
+    OK, then build it with tests, run the tests, and summarise.
+    Don't commit.
+
+Important for Phase 1:
+- Item texts must be copied EXACTLY from the official instruments
+  (GAD-2, GAD-7, PHQ-9, OASIS, DASS-21). Ask Claude to cite the source
+  for each, and check them yourself against the original papers/forms.
+- Hindi translations: only use official validated translations. If you
+  don't have them yet, leave Hindi out for now (it belongs to Phase 8).
+
+
+LATER PHASES (one per session, same prompt with a new number)
+-------------------------------------------------------------
+  2  Database models, Alembic migrations, sessions/answers/submit API, safety check
+  3  Frontend: landing, consent, assessment flow, crisis screen
+  4  Results page + PDF report
+  5  ML: synthetic data, training, evaluation, model card, SHAP
+  6  Login, history dashboard, delete-my-data
+  7  Clinician dashboard, share codes, audit log
+  8  Hindi, accessibility pass, hardening, deploy

@@ -1,1 +1,9 @@
 .env
+node_modules
+__pycache__
+.venv
+.next
+ml/data/raw
+ml/models/*.joblib
+.pytest_cache
+.ruff_cache

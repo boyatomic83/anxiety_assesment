@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * Calma design tokens (SPEC.md section 9).
+ * Brand colours are exposed as Tailwind colours: bg-sage, text-slate-brand, bg-band-mild, ...
+ * shadcn/ui semantic tokens (--primary, --card, ...) map onto them.
+ */
+:root {
+  --radius: 1rem; /* 16px cards */
+
+  /* Brand palette (exact SPEC values) */
+  --calma-bg: #f7f8f6;
+  --calma-surface: #ffffff;
+  --calma-text: #1f2a2e;
+  --calma-sage: #5b8a72;
+  --calma-sage-deep: #4a7561; /* sage darkened for AA contrast with white text (5.2:1) */
+  --calma-slate: #5a7184;
+
+  /* Severity bands (muted, never neon) */
+  --band-minimal: #7fb59a;
+  --band-mild: #c9b458;
+  --band-moderate: #d9905b;
+  --band-severe: #b5615a;
+
+  /* shadcn/ui semantic tokens */
+  --background: var(--calma-bg);
+  --foreground: var(--calma-text);
+  --card: var(--calma-surface);
+  --card-foreground: var(--calma-text);
+  --popover: var(--calma-surface);
+  --popover-foreground: var(--calma-text);
+  --primary: var(--calma-sage-deep);
+  --primary-foreground: #ffffff;
+  --secondary: #e9eef1;
+  --secondary-foreground: var(--calma-text);
+  --muted: #eef1ee;
+  --muted-foreground: var(--calma-slate);
+  --accent: #e6efe9;
+  --accent-foreground: var(--calma-text);
+  --destructive: var(--band-severe);
+  --border: #e2e6e2;
+  --input: #d8ddd8;
+  --ring: var(--calma-sage);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface: var(--calma-surface);
+  --color-sage: var(--calma-sage);
+  --color-sage-deep: var(--calma-sage-deep);
+  --color-slate-brand: var(--calma-slate);
+  --color-band-minimal: var(--band-minimal);
+  --color-band-mild: var(--band-mild);
+  --color-band-moderate: var(--band-moderate);
+  --color-band-severe: var(--band-severe);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), "Source Serif 4", Georgia, serif;
+
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 6px);
+  --radius-lg: calc(var(--radius) - 4px);
+  --radius-xl: var(--radius);
+
+  --shadow-soft: 0 1px 2px rgb(31 42 46 / 0.04), 0 8px 24px rgb(31 42 46 / 0.06);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-size: 17px; /* base 17px */
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+    line-height: 1.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
